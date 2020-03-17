@@ -2,7 +2,7 @@ FROM alpine:3.9 as fetcher
 
 RUN apk add -U wget ca-certificates
 
-ARG VERSION=0.1.5
+ARG VERSION=0.1.6
 ARG OS=linux
 ARG ARCH=amd64
 
