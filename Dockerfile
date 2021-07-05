@@ -1,4 +1,4 @@
-FROM alpine:3.9@sha256:414e0518bb9228d35e4cd5165567fb91d26c6a214e9c95899e1e056fcd349011 as fetcher
+FROM alpine:3.14@sha256:234cb88d3020898631af0ccbbcca9a66ae7306ecd30c9720690858c1b007d2a0 as fetcher
 
 RUN apk add -U wget ca-certificates
 
@@ -10,6 +10,6 @@ RUN wget https://github.com/miguelmota/ipdr/releases/download/v$VERSION/ipdr_${V
 RUN tar zxvf ipdr_${VERSION}_${OS}_${ARCH}.tar.gz
 RUN mv ipdr /ipdr
 
-FROM alpine:3.9@sha256:414e0518bb9228d35e4cd5165567fb91d26c6a214e9c95899e1e056fcd349011
+FROM alpine:3.14@sha256:234cb88d3020898631af0ccbbcca9a66ae7306ecd30c9720690858c1b007d2a0
 COPY --from=fetcher /ipdr /usr/bin/ipdr
 ENTRYPOINT ["ipdr"]
