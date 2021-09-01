@@ -1,9 +1,6 @@
 {
   "extends": [
-    "config:base",
-    "docker:pinDigests",
-    "group:allNonMajor",
-    "schedule:weekly"
+    "local>anguslees/renovate-config"
   ],
   "regexManagers": [
     {
