@@ -7,7 +7,7 @@ ARG IPDR_VERSION=0.1.6
 ARG OS=linux
 ARG ARCH=amd64
 
-RUN wget https://github.com/miguelmota/ipdr/releases/download/v$VERSION/ipdr_${IPDR_VERSION}_${OS}_${ARCH}.tar.gz
+RUN wget https://github.com/miguelmota/ipdr/releases/download/v${IPDR_VERSION}/ipdr_${IPDR_VERSION}_${OS}_${ARCH}.tar.gz
 RUN tar zxvf ipdr_${IPDR_VERSION}_${OS}_${ARCH}.tar.gz
 RUN mv ipdr /ipdr
 
