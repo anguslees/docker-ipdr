@@ -11,6 +11,6 @@ RUN wget https://github.com/miguelmota/ipdr/releases/download/${IPDR_VERSION}/ip
 RUN tar zxvf ipdr_${IPDR_VERSION#v}_${TARGETOS}_${TARGETARCH}.tar.gz
 RUN mv ipdr /ipdr
 
-FROM --platform=$TARGETPLATFORM gcr.io/distroless/static
+FROM --platform=$TARGETPLATFORM gcr.io/distroless/static@sha256:1cc74da80bbf80d89c94e0c7fe22830aa617f47643f2db73f66c8bd5bf510b25
 COPY --from=fetcher /ipdr /usr/bin/ipdr
 ENTRYPOINT ["ipdr"]
