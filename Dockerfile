@@ -5,16 +5,16 @@ RUN apk add -U wget ca-certificates
 # renovate: datasource=github-releases depName=miguelmota/ipdr
 ENV IPDR_VERSION=v0.1.7
 
-FROM fetcher-base AS fetcher-linux/arm/v6
+FROM fetcher-base AS fetcher-linux-arm-v6
 ENV SUFFIX=linux_armv6
 
-FROM fetcher-base AS fetcher-linux/arm64
+FROM fetcher-base AS fetcher-linux-arm64-
 ENV SUFFIX=linux_arm64
 
-FROM fetcher-base AS fetcher-linux/amd64
+FROM fetcher-base AS fetcher-linux-amd64-
 ENV SUFFIX=linux_amd64
 
-FROM --platform=$BUILDPLATFORM fetcher-$TARGETPLATFORM AS fetcher
+FROM --platform=$BUILDPLATFORM fetcher-$TARGETOS-$TARGETARCH-$TARGETVARIANT AS fetcher
 
 ARG TARGETOS
 
