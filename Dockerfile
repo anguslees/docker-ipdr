@@ -19,10 +19,8 @@ ENV SUFFIX=linux_386
 
 FROM --platform=$BUILDPLATFORM fetcher-$TARGETOS-$TARGETARCH-$TARGETVARIANT AS fetcher
 
-ARG TARGETOS
-
-RUN wget https://github.com/miguelmota/ipdr/releases/download/${IPDR_VERSION}/ipdr_${IPDR_VERSION#v}_${TARGETOS}_${SUFFIX}.tar.gz
-RUN tar zxvf ipdr_${IPDR_VERSION#v}_${TARGETOS}_${SUFFIX}.tar.gz
+RUN wget https://github.com/miguelmota/ipdr/releases/download/${IPDR_VERSION}/ipdr_${IPDR_VERSION#v}_${SUFFIX}.tar.gz
+RUN tar zxvf ipdr_${IPDR_VERSION#v}_${SUFFIX}.tar.gz
 RUN mv ipdr /ipdr
 
 # distroless lacks variants?
