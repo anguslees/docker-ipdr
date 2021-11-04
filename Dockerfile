@@ -1,15 +1,25 @@
-FROM --platform=$BUILDPLATFORM alpine:3.14@sha256:e1c082e3d3c45cccac829840a25941e679c25d438cc8412c2fa221cf1a824e6a as fetcher
+FROM alpine:3.14@sha256:e1c082e3d3c45cccac829840a25941e679c25d438cc8412c2fa221cf1a824e6a AS fetcher-base
 
 RUN apk add -U wget ca-certificates
 
 # renovate: datasource=github-releases depName=miguelmota/ipdr
-ARG IPDR_VERSION=v0.1.7
-ARG TARGETOS=linux
-ARG TARGETARCH=amd64
-ARG TARGETVARIANT
+ENV IPDR_VERSION=v0.1.7
 
-RUN wget https://github.com/miguelmota/ipdr/releases/download/${IPDR_VERSION}/ipdr_${IPDR_VERSION#v}_${TARGETOS}_${TARGETARCH}${TARGETVARIANT}.tar.gz
-RUN tar zxvf ipdr_${IPDR_VERSION#v}_${TARGETOS}_${TARGETARCH}${TARGETVARIANT}.tar.gz
+FROM fetcher-base AS fetcher-linux/arm/v6
+ENV SUFFIX=linux_armv6
+
+FROM fetcher-base AS fetcher-linux/arm64
+ENV SUFFIX=linux_arm64
+
+FROM fetcher-base AS fetcher-linux/amd64
+ENV SUFFIX=linux_amd64
+
+FROM --platform=$BUILDPLATFORM fetcher-$TARGETPLATFORM AS fetcher
+
+ARG TARGETOS
+
+RUN wget https://github.com/miguelmota/ipdr/releases/download/${IPDR_VERSION}/ipdr_${IPDR_VERSION#v}_${TARGETOS}_${SUFFIX}.tar.gz
+RUN tar zxvf ipdr_${IPDR_VERSION#v}_${TARGETOS}_${SUFFIX}.tar.gz
 RUN mv ipdr /ipdr
 
 # distroless lacks variants?
