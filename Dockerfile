@@ -3,7 +3,7 @@ FROM --platform=$BUILDPLATFORM alpine:3.14@sha256:e1c082e3d3c45cccac829840a25941
 RUN apk add -U wget ca-certificates
 
 # renovate: datasource=github-releases depName=miguelmota/ipdr
-ARG IPDR_VERSION=v0.1.6
+ARG IPDR_VERSION=v0.1.7
 ARG TARGETOS=linux
 ARG TARGETARCH=amd64
 
