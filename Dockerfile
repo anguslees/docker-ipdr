@@ -1,18 +1,21 @@
-FROM alpine:3.14@sha256:e1c082e3d3c45cccac829840a25941e679c25d438cc8412c2fa221cf1a824e6a AS fetcher-base
+FROM --platform=$BUILDPLATFORM alpine:3.14@sha256:e1c082e3d3c45cccac829840a25941e679c25d438cc8412c2fa221cf1a824e6a AS fetcher-base
 
 RUN apk add -U wget ca-certificates
 
 # renovate: datasource=github-releases depName=miguelmota/ipdr
 ENV IPDR_VERSION=v0.1.7
 
-FROM fetcher-base AS fetcher-linux-arm-v6
+FROM --platform=$BUILDPLATFORM fetcher-base AS fetcher-linux-arm-v6
 ENV SUFFIX=linux_armv6
 
-FROM fetcher-base AS fetcher-linux-arm64-
+FROM --platform=$BUILDPLATFORM fetcher-base AS fetcher-linux-arm64-
 ENV SUFFIX=linux_arm64
 
-FROM fetcher-base AS fetcher-linux-amd64-
+FROM --platform=$BUILDPLATFORM fetcher-base AS fetcher-linux-amd64-
 ENV SUFFIX=linux_amd64
+
+FROM --platform=$BUILDPLATFORM fetcher-base AS fetcher-linux-386-
+ENV SUFFIX=linux_386
 
 FROM --platform=$BUILDPLATFORM fetcher-$TARGETOS-$TARGETARCH-$TARGETVARIANT AS fetcher
 
