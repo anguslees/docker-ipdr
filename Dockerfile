@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM alpine:3.15@sha256:4edbd2beb5f78b1014028f4fbb99f3237d9561100b6881aabbf5acce2c4f9454 AS fetcher-base
+FROM --platform=$BUILDPLATFORM alpine:3.15@sha256:0483110c51a764abe175a8cefb941541ca0bc0f628ce418d3a660338abf4622a AS fetcher-base
 
 RUN apk add -U wget ca-certificates
 
