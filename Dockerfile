@@ -24,6 +24,6 @@ RUN tar zxvf ipdr_${IPDR_VERSION#v}_${SUFFIX}.tar.gz
 RUN mv ipdr /ipdr
 
 # distroless lacks variants?
-FROM --platform=$TARGETOS/$TARGETARCH gcr.io/distroless/static@sha256:972618ca78034aaddc55864342014a96b85108c607372f7cbd0dbd1361f1d841
+FROM --platform=$TARGETOS/$TARGETARCH gcr.io/distroless/static@sha256:d90359c7a3ad67b3c11ca44fd5f3f5208cbef546f2e692b0dc3410a869de46bf
 COPY --from=fetcher /ipdr /usr/bin/ipdr
 ENTRYPOINT ["ipdr"]
